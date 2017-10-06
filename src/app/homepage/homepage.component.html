@@ -10,6 +10,7 @@
     </div>
   </div>
 </div>
+<app-new></app-new>
 <div *ngIf="todos">
   <div class="row">
     <div class="col-md-4" *ngFor="let todo of todos" [ngClass]="{true: 'todo', false: 'danger'}[todo.status]">

@@ -1,3 +1,14 @@
-<p>
-  new works!
-</p>
+<div class="row justify-content-center">
+  <div class="col-md-8 card m-4 p-5">
+    <form [formGroup]="rForm" (ngSubmit)="addPost(rForm.value)">
+      <h1><strong>ADD NEW TODO</strong></h1>
+      <div class="form-group row mt-5 mb-5">
+        <label for="title" class="col-sm-2 col-form-label">Title</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="title" placeholder="Eg. Play FIFA">
+        </div>
+      </div>
+      <button type="submit" class="btn btn-success pl-4 pr-4" [disabled]="!rForm.valid"><strong>ADD</strong></button>
+    </form>
+  </div>
+</div>
