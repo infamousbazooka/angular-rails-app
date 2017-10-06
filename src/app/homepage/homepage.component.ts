@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../data.service'
+import { Todo } from '../Todo'
 
 @Component({
   selector: 'app-homepage',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomepageComponent implements OnInit {
 
-  constructor() { }
+  
+  todos: Todo[] = [];
+
+  constructor(private dataService: DataService) {
+    
+  }
 
   ngOnInit() {
+    this.dataService
+    .getTodos()
+    .subscribe(t => {
+      this.todos = t
+      console.log(this.todos);
+      
+    });
   }
 
 }

@@ -1,3 +1,12 @@
-<p>
-  homepage works!
-</p>
+<div *ngIf="todos">
+
+
+  <ul *ngFor="let todo of todos">
+    <li>
+      <div *ngIf="todo.status">
+        {{todo.title}}
+      </div>
+    </li>
+  </ul>
+
+</div>
