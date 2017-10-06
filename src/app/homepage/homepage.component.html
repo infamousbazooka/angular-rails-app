@@ -1,12 +1,21 @@
-<div *ngIf="todos">
-
-
-  <ul *ngFor="let todo of todos">
-    <li>
-      <div *ngIf="todo.status">
-        {{todo.title}}
+<div class="row">
+  <div class="container-fluid">
+    <div class="jumbotron">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h1 class="display-3">Hello, world!</h1>
+            <p class="lead">This is a simple TODO applicaiton</p>
+        </div>
       </div>
-    </li>
-  </ul>
-
+    </div>
+  </div>
+</div>
+<div *ngIf="todos">
+  <div class="row">
+    <div class="col-md-4" *ngFor="let todo of todos" [ngClass]="{true: 'todo', false: 'danger'}[todo.status]">
+      <div class="card m-3 p-3">
+        <h4><strong>{{todo.title}}</strong></h4>
+      </div>
+    </div>
+  </div>
 </div>
