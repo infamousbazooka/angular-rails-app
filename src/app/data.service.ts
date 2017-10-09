@@ -17,9 +17,21 @@ export class DataService {
   constructor( private http : Http) { }
 
   getTodos() : Observable<any>{
-
      return this.http
       .get(`${this.todosUrl}`, this.options)
       .map((res: any) => { return res.json()});
-  } 
+  }
+
+  addTodo(title: string) : Observable<Todo>{
+    return this.http
+      .post(`${this.todosUrl}`, {title: title}, this.options)
+      .map((res: any) => {return res.json()})
+      
+  }
+
+  deleteTodo(id: number) : Observable<Todo> {
+    return this.http
+    .delete(`${this.todosUrl}` + "7", this.options)
+    .map((res: any) => {return res.json()})
+  }
 }

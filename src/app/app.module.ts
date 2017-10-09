@@ -20,7 +20,7 @@ import { NewComponent } from './new/new.component'
     HttpModule,
     ReactiveFormsModule
   ],
-  providers: [ DataService],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

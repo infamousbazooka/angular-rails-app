@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Observable } from 'rxjs/Rx'
+import { DataService } from '../data.service'
+import { Todo } from '../Todo'
 
 @Component({
   selector: 'app-new',
@@ -8,23 +11,34 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class NewComponent implements OnInit {
 
-  rForm: FormGroup;
-  todo:any;
-  title:string = '';
-  status:boolean = false;
+  todoForm: FormGroup;
+  todo: Todo;
+  title: string = '';
+  status: boolean = false;
+  submitted: boolean = false;
 
-  constructor(private fb: FormBuilder) {
-    this.rForm = fb.group({
-      'title' : [null, Validators.required],
-      'status' : [null, Validators.required]
+  constructor(private fb: FormBuilder, private dataService: DataService) {
+    this.todoForm = fb.group({
+      'title' : [null, Validators.required]
     });
   }
-  addPost(todo) {
-    this.title = todo.title;
-    this.status = todo.status;
+
+  addTodo() {
+    this.submitted = true
+    this.dataService.addTodo(this.todoForm.value.title)
+      .subscribe(data => {
+        return true
+      }, error => {
+        console.log("Error returning observable!");
+        return Observable.throw(error)
+      })
+    console.log(this.todoForm.value.title);
   }
 
   ngOnInit() {
+    this.todoForm = new FormGroup({
+       title: new FormControl()
+    });
   }
 
 }
