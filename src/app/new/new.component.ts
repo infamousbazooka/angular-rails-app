@@ -26,7 +26,8 @@ export class NewComponent implements OnInit {
   addTodo() {
     this.submitted = true
     this.dataService.addTodo(this.todoForm.value.title)
-      .subscribe(data => {
+      .subscribe((data: any) => {
+        this.todo = data
         return true
       }, error => {
         console.log("Error returning observable!");

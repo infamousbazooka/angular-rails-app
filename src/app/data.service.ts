@@ -31,7 +31,13 @@ export class DataService {
 
   deleteTodo(id: number) : Observable<Todo> {
     return this.http
-    .delete(`${this.todosUrl}` + "7", this.options)
+    .delete(`${this.todosUrl}` + "/" + id, this.options)
+    .map((res: any) => {return res.json()})
+  }
+
+  updateTodo(id: number) : Observable<Todo> {
+    return this.http
+    .patch(`${this.todosUrl}` + "/" + id, this.options)
     .map((res: any) => {return res.json()})
   }
 }
