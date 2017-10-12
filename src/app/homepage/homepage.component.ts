@@ -10,12 +10,9 @@ import { Todo } from '../Todo'
 })
 export class HomepageComponent implements OnInit {
 
-  
   todos: Todo[] = [];
 
-  constructor(private dataService: DataService) {
-    
-  }
+  constructor(private dataService: DataService) { }
 
   deleteTodo(id: number) {
     this.dataService
@@ -24,7 +21,7 @@ export class HomepageComponent implements OnInit {
         this.todos = data;
         return true
       }, error => {
-        console.log("Error returning observable!");
+        console.log("Error returning observable!")
         return Observable.throw(error)
       })
   }
@@ -36,18 +33,21 @@ export class HomepageComponent implements OnInit {
         this.todos = data
         return true
       }, error => {
-        console.log("Error returning observable!");
+        console.log("Error returning observable!")
         return Observable.throw(error)
       })
   }
 
   ngOnInit() {
-    this.dataService
-    .getTodos()
-    .subscribe(t => {
-      this.todos = t
-      console.log(this.todos);
-    });
+    
+    this.dataService.getTodos().subscribe(data => {
+      this.todos = data
+    })
+
+  }
+
+  receiveTodo(todo) {
+    this.todos.push(todo)
   }
 
 }

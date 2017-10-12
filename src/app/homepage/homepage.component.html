@@ -1,4 +1,4 @@
-<app-new></app-new>
+<app-new (todo)="receiveTodo($event)"></app-new>
 <div class="container" *ngIf="todos">
   <div class="row justify-content-center todos">
     <div class="col-md-8 todo" *ngFor="let todo of todos">

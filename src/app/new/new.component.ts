@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Rx'
 import { DataService } from '../data.service'
@@ -11,11 +11,8 @@ import { Todo } from '../Todo'
 })
 export class NewComponent implements OnInit {
 
-  todoForm: FormGroup;
-  todo: Todo;
-  title: string = '';
-  status: boolean = false;
-  submitted: boolean = false;
+  todoForm: FormGroup
+  @Output() todo: EventEmitter<Todo> = new EventEmitter()
 
   constructor(private fb: FormBuilder, private dataService: DataService) {
     this.todoForm = fb.group({
@@ -24,16 +21,13 @@ export class NewComponent implements OnInit {
   }
 
   addTodo() {
-    this.submitted = true
-    this.dataService.addTodo(this.todoForm.value.title)
-      .subscribe((data: any) => {
-        this.todo = data
-        return true
-      }, error => {
-        console.log("Error returning observable!");
-        return Observable.throw(error)
-      })
-    console.log(this.todoForm.value.title);
+    this.dataService.addTodo(this.todoForm.value.title).subscribe((data: Todo) => {
+      this.todo.emit(data)
+      this.todoForm.reset()
+      return true
+    }, error => {
+      return Observable.throw(error)
+    })
   }
 
   ngOnInit() {
