@@ -18,7 +18,11 @@ export class HomepageComponent implements OnInit {
     this.dataService
       .deleteTodo(id)
       .subscribe((data:any) => {
-        this.todos = data;
+        this.todos.map((todo, key) => {
+          if(data.id == todo.id){
+            this.todos.splice(key, 1)
+          }
+        })
         return true
       }, error => {
         console.log("Error returning observable!")
@@ -30,7 +34,12 @@ export class HomepageComponent implements OnInit {
     this.dataService
       .updateTodo(id)
       .subscribe((data: any) => {
-        this.todos = data
+        this.todos = this.todos.map(todo => {
+          if(data.id == todo.id){
+            todo.status = data.status
+          }
+          return todo
+        })
         return true
       }, error => {
         console.log("Error returning observable!")
@@ -39,11 +48,9 @@ export class HomepageComponent implements OnInit {
   }
 
   ngOnInit() {
-    
     this.dataService.getTodos().subscribe(data => {
       this.todos = data
     })
-
   }
 
   receiveTodo(todo) {
