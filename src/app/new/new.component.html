@@ -1,14 +1,10 @@
 <div class="row justify-content-center">
-  <div class="col-md-8 card m-4 p-5">
+  <div class="col-md-6 m-4 p-5">
     <form [formGroup]="todoForm" (ngSubmit)="addTodo()">
-      <h1><strong>ADD NEW TODO</strong></h1>
-      <div class="form-group row mt-5 mb-5">
-        <label for="title" class="col-sm-2 col-form-label"><h4><strong>Title</strong></h4></label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" formControlName="title" id="title" placeholder="Eg. Play FIFA">
-        </div>
+      <div class="input-group row mt-5 mb-5 shadow">
+        <input type="text" class="form-control" formControlName="title" id="title" placeholder="Eg. Play FIFA">
+        <div class="input-group-addon"><span class="fa fa-plus"></span></div>
       </div>
-      <button type="submit" class="btn btn-success pl-4 pr-4"><strong>ADD</strong></button>
     </form>
   </div>
 </div>
